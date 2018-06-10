@@ -6,7 +6,7 @@ const _import = require('./_import_development')
 
 export const constantRouterMap = [
   {
-    path: '/autoForm',
+    path: '/',
     component: create
   }
 ]
