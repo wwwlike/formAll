@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import create from '../component/AutoForm/create.vue'
 const _import = require('./_import_development')
-
+// 路由配置
 export const constantRouterMap = [
   {
     path: '/',

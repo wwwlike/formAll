@@ -16,7 +16,7 @@ table  转换后的table 数组
   <div>
     <!-- {{thisData}} -->
     <!--v-if="col.if"-->
-    <el-form size="small" :model="thisData" status-icon class="relativeFull " ref="dynamicValidateForm" labelPosition="left">
+    <el-form size="small" :model="thisData" status-icon :inline="true" ref="dynamicValidateForm" labelPosition="left">
       <el-row :key="index" v-for="(row,index) in table">
         <el-col :class="{red:col.key===selectKey}" :span="col.span" @click.native="()=>{selectKey=col.key;$emit('selected',col.key)}" :key="col_index" v-for="(col,col_index) in row">
           <el-form-item v-if="col.if===undefined|| col.if===false" :prop="col.key" :label="col.title">
