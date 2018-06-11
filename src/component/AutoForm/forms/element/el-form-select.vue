@@ -1,7 +1,7 @@
 <template>
  
-    <el-select v-model="thisData[conf.key]" v-bind=attrs>
-      <el-option v  v-for="(item,key) in conf.options" :key="key" :label="item" :value="key" />
+    <el-select v-model="thisData[conf.key]" style="width:100%" v-bind=attrs>
+      <el-option v  v-for="(item,key) in conf.options" :key="key"  :label="item" :value="key" />
      </el-select> 
 
 </template>

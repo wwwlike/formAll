@@ -6,7 +6,6 @@
 const hidden = {
   data() {
     return {
-      hiddens: [], // 有
       attrs: {
         hidden: { title: '隐藏条件', colType: 'object', span: 12 }
         // attr: { title: '隐藏条件1', colType: 'object', span: 12

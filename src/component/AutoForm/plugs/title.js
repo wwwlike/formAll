@@ -7,8 +7,7 @@ const title = {
   data() {
     return {
       attrs: {
-        title: { title: '字段说明', colType: 'input', span: 12
-        }
+        title: { title: '字段说明', colType: 'input', span: 12 }
       }
     }
   },

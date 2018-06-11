@@ -13,13 +13,12 @@ thisForm 所有表单
 table  转换后的table 数组
 -->
 <template>
-  <div>
-    <!-- {{thisData}} -->
+ 
     <!--v-if="col.if"-->
     <el-form size="small" :model="thisData" status-icon :inline="true" ref="dynamicValidateForm" labelPosition="left">
       <el-row :key="index" v-for="(row,index) in table">
-        <el-col :class="{red:col.key===selectKey}" :span="col.span" @click.native="()=>{selectKey=col.key;$emit('selected',col.key)}" :key="col_index" v-for="(col,col_index) in row">
-          <el-form-item v-if="col.if===undefined|| col.if===false" :prop="col.key" :label="col.title">
+        <el-col :class="{red:col.key===selectKey}"  :span="col.span?col.span:12" @click.native="()=>{selectKey=col.key;$emit('selected',col.key)}" :key="col_index" v-for="(col,col_index) in row">
+          <el-form-item label-width="100px" v-if="col.if===undefined|| col.if===false" :prop="col.key" :label="col.title">
             <!-- <div>{{col}}</div> -->
             <!-- {{thisData[col.key]}} -->
             <!-- 1:字段类型 2字段配置信息 3全部数值(改关联值的影响)-->
@@ -30,7 +29,7 @@ table  转换后的table 数组
         </el-col>
       </el-row>
     </el-form>
-  </div>
+
 </template>
 
 <script>
@@ -48,7 +47,7 @@ import common from './forms/common.vue'
 // import showType from './attr/showType.vue'
 
 export default {
-  mixins: [hidden, title, colType, disabled],
+  mixins: [hidden, disabled, colType, title], // 混合进来的各种组件 在design情况下需要
   components: { elFormDate, elFormInput, elFormSelect, elFormObject, common },
 
   data() {
@@ -70,7 +69,7 @@ export default {
   computed: {
     thisForm() {
       if (this.showType === 'design') {
-        return this.attrs
+        return this.attrs // 混合进来的各种组件里面的attrs集合
       } else {
         return this.autoForm
         // this.$set(this, 'thisForm', news)
@@ -127,12 +126,6 @@ export default {
         this.$set(this, 'thisData', news)
       }, deep: true, immediate: true
     }
-    // autoForm: {
-    //   handler(news, old) {
-    //     this.thisForm = {}
-    //     this.$set(this, 'thisForm', news)
-    //   }, deep: true, immediate: true
-    // }
   }
 }
 </script>
