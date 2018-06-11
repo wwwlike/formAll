@@ -39,8 +39,10 @@ import elmForm from '@/component/AutoForm/elmForm.vue'
 export default {
   components: { elmForm },
   created() {
+    debugger
     var obj = JSON.parse(sessionStorage.getItem('array'))
-    this.$set('autoForm', this.arrayToForm(obj))
+    this.arrayToForm(obj)
+    // this.$set(this, 'autoForm', this.arrayToForm(obj))
   },
   data() {
     return {
@@ -89,8 +91,9 @@ export default {
         temp.span = 4
         temp.x = 0
         temp.y = i
+        temp.hidden = { 'a': '1' }
         i++
-        this.autoForm[obj[attr].key] = temp
+        this.$set(this.autoForm, obj[attr].key, temp)// this.autoForm[obj[attr].key] = temp
       }
     }
   }

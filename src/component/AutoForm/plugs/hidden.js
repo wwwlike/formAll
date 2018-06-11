@@ -23,6 +23,7 @@ const hidden = {
       if (conf.hidden) { // 字段配置里是否含hidden
         for (const attr1 in conf.hidden) {
           this.$watch('thisData.' + attr1, (newVal, oldVal) => {
+            alert('11111111')
             var flag = this.hiddenCheck(this, conf.hidden)
             this.$set(conf, 'if', flag)
           }, {
