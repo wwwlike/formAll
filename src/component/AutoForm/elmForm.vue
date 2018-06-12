@@ -9,13 +9,15 @@
 -->
 
 <!--
-thisForm 所有表单
-table  转换后的table 数组
+thisForm 当前表单定义信息
+table  thisForm转换后的table 数组增加XY坐标的thisForm
+formData：所有表单的输入项目
 -->
 <template>
- 
+ <div>
+  
     <!--v-if="col.if"-->
-    <el-form size="small" :model="thisData" status-icon :inline="true" ref="dynamicValidateForm" labelPosition="left">
+    <el-form size="small" :model="formData" status-icon :inline="true" ref="dynamicValidateForm" labelPosition="left">
       <el-row :key="index" v-for="(row,index) in table">
         <el-col :class="{red:col.key===selectKey}"  :span="col.span?col.span:12" @click.native="()=>{selectKey=col.key;$emit('selected',col.key)}" :key="col_index" v-for="(col,col_index) in row">
           <el-form-item label-width="100px" v-if="col.if===undefined|| col.if===false" :prop="col.key" :label="col.title">
@@ -23,13 +25,13 @@ table  转换后的table 数组
             <!-- {{thisData[col.key]}} -->
             <!-- 1:字段类型 2字段配置信息 3全部数值(改关联值的影响)-->
             <keep-alive>
-              <component　v-bind:is="'el-form-'+col.colType" 　:conf="col" :allData="thisData" :form="thisForm" @change='change'></component>
+              <component　v-bind:is="'el-form-'+col.colType" :showType="showType" :conf="col" :allData="formData" :form="thisForm" @change='change'></component>
             </keep-alive>
           </el-form-item>
         </el-col>
       </el-row>
     </el-form>
-
+</div>
 </template>
 
 <script>
@@ -69,7 +71,7 @@ export default {
   computed: {
     thisForm() {
       if (this.showType === 'design') {
-        return this.attrs // 混合进来的各种组件里面的attrs集合
+        return this.attrs // mixins混合进来的各种插件里面的attrs集合
       } else {
         return this.autoForm
         // this.$set(this, 'thisForm', news)
@@ -121,9 +123,9 @@ export default {
   watch: {
     formData: {
       handler(news, old) {
-        debugger
-        this.thisData = {}
-        this.$set(this, 'thisData', news)
+        // // this.$set(this, 'thisData', JSON.parse(JSON.stringify(news)))
+        // this.thisData = {}
+        // // this.$set(this, 'thisData', news)
       }, deep: true, immediate: true
     }
   }

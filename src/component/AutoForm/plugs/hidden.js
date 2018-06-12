@@ -12,37 +12,40 @@ const hidden = {
       }
     }
   },
-  computed: {
-    hiddens() {
 
-    }
-  },
   created() {
-    for (var attr in this.thisForm) {
-      const conf = this.thisForm[attr] // 取得一个字段的配置
-      if (conf.hidden) { // 字段配置里是否含hidden
-        for (const attr1 in conf.hidden) {
-          this.$watch('thisData.' + attr1, (newVal, oldVal) => {
-            alert('11111111')
-            var flag = this.hiddenCheck(this, conf.hidden)
-            this.$set(conf, 'if', flag)
-          }, {
-            immediate: true,
-            deep: true
-          })
-        }
-      }
+    // for (var attr in this.thisForm) {
+    //   const conf = this.thisForm[attr] // 取得一个字段的配置
+    //   if (conf.hidden) { // 字段配置里是否含hidden
+    //     for (const attr1 in conf.hidden) {
+    //       this.$watch('thisData.' + attr1, (newVal, oldVal) => {
+    //         var flag = this.hiddenCheck(this, conf.hidden)
+    //         this.$set(conf, 'if', flag)
+    //       }, {
+    //         immediate: true,
+    //         deep: true
+    //       })
+    //     }
+    //   }
+    // }
+  },
+  computed: {
+    'conf.if': function() {
+      return false
     }
   },
   updated() {
   },
-  // watch: {
-  //   'conf.hidden': {
-  //     handler(news) {
-  //       alert(news)
-  //     },
-  //   }
-  // },
+  watch: {
+    thisData: {
+      handler(news) {
+        if (news.hidden) {
+          debugger
+          alert(news.hidden)
+        }
+      }, deep: true, immediate: true
+    }
+  },
   methods: {
     hiddenCheck: function(obj, checkObj) {
       for (const attr in checkObj) {

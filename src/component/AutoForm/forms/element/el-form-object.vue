@@ -31,8 +31,8 @@ export default {
       } catch (error) {
         return
       }
-      this.thisData[this.conf.key] = obj
-    }
+      this.$set(this.thisData, this.conf.key, obj)
+    }, deep: true, immediate: true
   },
   extends: common
 

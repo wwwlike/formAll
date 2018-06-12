@@ -26,7 +26,8 @@
             </el-form-item>
             </el-col></el-row>
           </el-form>
-          <elm-form :formData="currField"  showType="design"></elm-form>
+          <!---->{{currField}}
+          <elm-form :formData="currField"  showType="design"></elm-form> 
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -91,7 +92,7 @@ export default {
         temp.span = 4
         temp.x = 0
         temp.y = i
-        temp.hidden = { 'a': '1' }
+        // temp.hidden = { 'a': '1' }
         i++
         this.$set(this.autoForm, obj[attr].key, temp)// this.autoForm[obj[attr].key] = temp
       }
