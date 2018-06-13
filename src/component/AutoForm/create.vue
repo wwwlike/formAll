@@ -41,7 +41,7 @@ export default {
   components: { elmForm },
   created() {
     debugger
-    var obj = JSON.parse(sessionStorage.getItem('array'))
+    var obj = JSON.parse(sessionStorage.getItem('formData'))
     this.arrayToForm(obj)
     // this.$set(this, 'autoForm', this.arrayToForm(obj))
   },
@@ -82,6 +82,7 @@ export default {
       delete this.autoForm[oldKey]
       this.$refs.autoform.selectKey = newKey
     },
+    // 数组转换对象
     arrayToForm(obj) {
       debugger
       var i = 0
