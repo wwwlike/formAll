@@ -2,7 +2,7 @@
 方便初始化表单
 -->
 <template>
-  <wirteObj :data="formData" @dataOut="dataOut"></wirteObj>
+  <wirteObj :formData="formData" @dataOut="dataOut"></wirteObj>
 </template>
 
 <script>
@@ -16,13 +16,15 @@ export default {
     }
   },
   created() {
-    if (sessionStorage.getItem('formData')) {
-      this.formData = JSON.parse(sessionStorage.getItem('formData'))
+    this.$set(this, 'formData', JSON.parse(localStorage.getItem('formData')))
+
+    if (!this.$route.query.opt && this.formData !== []) {
+      this.$router.push({ path: '/create' }) // -> /user/123
     }
   },
   methods: {
     dataOut(objData) {
-      sessionStorage.setItem('formData', JSON.stringify(objData))
+      localStorage.setItem('formData', JSON.stringify(objData))
       this.$router.push({ path: '/create' }) // -> /user/123
     }
   }

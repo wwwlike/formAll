@@ -33,32 +33,35 @@ const disabled = {
       // return true
     }
   },
-  created() {
-    for (var attr in this.thisForm) {
-      const conf = this.thisForm[attr]
-      if (conf.disabled) {
-        for (const attr in conf.disabled) {
-          this.$watch('thisData.' + attr, (newVal, oldVal) => {
-            var flag = this.disabledCheck(this, conf.disabled)
-            if (!conf['attr']) {
-              this.$set(conf, 'attr', {})
+  watch: {
+    thisForm: {
+      handler(newThisForm) {
+        if (this.selectKey) { // 有选中一条记录
+          const conf = newThisForm[this.selectKey] // 取得一个字段的配置
+          if (conf.disabled) { // 字段配置里是否含hidden
+            for (const attr1 in conf.disabled) {
+              this.$watch('formData.' + attr1, (newVal, oldVal) => {
+                debugger
+                var flag = this.hiddenCheck(this, conf.disabled)
+                this.$set(conf.attr, 'disabled', flag)
+
+                if (flag) {
+                  this.formData[conf.key] = null
+                }
+              }, {
+                immediate: true,
+                deep: true
+              })
             }
-            this.$set(conf.attr, 'disabled', flag)
-            if (flag) {
-              this.thisData[conf.key] = null
-            }
-          }, {
-            immediate: true,
-            deep: true
-          })
+          }
         }
-      }
+      }, deep: true, immediate: true
     }
   },
   methods: {
     disabledCheck: function(obj, checkObj) {
       for (const attr in checkObj) {
-        if (obj.thisData[attr] !== checkObj[attr]) {
+        if (obj.formData[attr] !== checkObj[attr]) {
           return false
         }
       }

@@ -4,11 +4,14 @@
   自动表单对象创建组件
 -->
 <template>
+
+
   <div class="wrap">
     <!-- <div class="left">111111111111333333333333333333333</div> -->
     <div class="middle">
       <el-tabs type="border-card" style="height:100%;">
         <el-tab-pane label="视图">
+          {{currField}}
           <elm-form :formData="thisData" showType="view" ref="autoform" :autoForm="autoForm" @selected="(selectKey)=>{colKey=selectKey}"></elm-form>
         </el-tab-pane>
         <el-tab-pane label="代码">
@@ -17,6 +20,9 @@
       </el-tabs>
     </div>
     <div class="right">
+      <div>
+         <router-link to="/?opt=true">上一步</router-link>
+      </div>
       <el-tabs type="border-card" style="height:96%;">
         <el-tab-pane label="基础属性">
           <el-form>
@@ -26,7 +32,7 @@
             </el-form-item>
             </el-col></el-row>
           </el-form>
-          <!---->{{currField}}
+          <!---->
           <elm-form :formData="currField"  showType="design"></elm-form> 
         </el-tab-pane>
       </el-tabs>
@@ -41,7 +47,7 @@ export default {
   components: { elmForm },
   created() {
     debugger
-    var obj = JSON.parse(sessionStorage.getItem('formData'))
+    var obj = JSON.parse(localStorage.getItem('formData'))
     this.arrayToForm(obj)
     // this.$set(this, 'autoForm', this.arrayToForm(obj))
   },

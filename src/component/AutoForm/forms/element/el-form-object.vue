@@ -1,13 +1,14 @@
 <!--object组件-->
 <template>
-
-<el-popover
+<div> 
+<el-popover  v-model="visible2"
   placement="right"
   width="400"
   trigger="click">
     <wirteObj :formData="formArray" @dataOut="dataOut"></wirteObj>
    <el-input v-model="tempStr"  slot="reference" v-bind=attrs></el-input> 
 </el-popover>
+</div>
 </template>
 
 <script>
@@ -20,6 +21,7 @@ export default {
   data() {
     return {
       tempStr: '',
+      visible2: false,
       formArray: []
     }
   },
@@ -28,6 +30,7 @@ export default {
   },
   methods: {
     dataOut(array) {
+      this.visible2 = false
       this.$set(this.thisData, this.conf.key, {})
       for (var i = 0; i < array.length; i++) {
         this.$set(this.thisData[this.conf.key], array[i].key, array[i].val)

@@ -15,8 +15,8 @@ formData：所有表单的输入项目
 -->
 <template>
  <div>
-  
     <!--v-if="col.if"-->
+    {{formData}}
     <el-form size="small" :model="formData" status-icon :inline="true" ref="dynamicValidateForm" labelPosition="left">
       <el-row :key="index" v-for="(row,index) in table">
         <el-col :class="{red:col.key===selectKey}"  :span="col.span?col.span:12" @click.native="()=>{selectKey=col.key;$emit('selected',col.key)}" :key="col_index" v-for="(col,col_index) in row">
@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     change(key, value) {
-      this.thisData[key] = value
+      this.formData[key] = value
       this.$emit('dataOut', this.thisData)
     },
     attrTables() {
