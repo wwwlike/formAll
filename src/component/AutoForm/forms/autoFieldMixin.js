@@ -14,7 +14,7 @@ var autoFieldMixin = {
     }
   },
   created: function() {
-    alert('1')
+
   },
   computed: {
     aaa() {

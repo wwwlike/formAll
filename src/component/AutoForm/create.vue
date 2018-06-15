@@ -46,7 +46,6 @@ import elmForm from '@/component/AutoForm/elmForm.vue'
 export default {
   components: { elmForm },
   created() {
-    debugger
     var obj = JSON.parse(localStorage.getItem('formData'))
     this.arrayToForm(obj)
     // this.$set(this, 'autoForm', this.arrayToForm(obj))
@@ -71,7 +70,7 @@ export default {
     },
     currField: function() {
       var obj = JSON.parse(sessionStorage.getItem('array'))
-    }
+    }, deep: true
   },
   computed: {
     currField() {
@@ -90,7 +89,6 @@ export default {
     },
     // 数组转换对象
     arrayToForm(obj) {
-      debugger
       var i = 0
       for (var attr in obj) {
         var temp = {}

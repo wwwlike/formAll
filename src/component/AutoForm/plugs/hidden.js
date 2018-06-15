@@ -2,61 +2,50 @@
 // 字段解析处理器
 // 1 初始化读这个值后如何处理
 // 2 这个指改变后如何处理2
+// import { watchFormData } from './object.js'
 
 const hidden = {
   data() {
     return {
       attrs: {
         hidden: { title: '隐藏条件', colType: 'object', span: 12 }
-        // attr: { title: '隐藏条件1', colType: 'object', span: 12
       }
-    }
-  },
 
+    }
+  },
   created() {
-    // for (var attr in this.thisForm) {
-    //   const conf = this.thisForm[attr] // 取得一个字段的配置
-    //   if (conf.hidden) { // 字段配置里是否含hidden
-    //     for (const attr1 in conf.hidden) {
-    //       this.$watch('thisData.' + attr1, (newVal, oldVal) => {
-    //         var flag = this.hiddenCheck(this, conf.hidden)
-    //         this.$set(conf, 'if', flag)
-    //       }, {
-    //         immediate: true,
-    //         deep: true
-    //       })
-    //     }
-    //   }
-    // }
+    // debugger
+    // // alert('1')
+    // this.$watch('formData.' + this.selectKey + '.hidden', (newVal, oldVal) => {
+    //   debugger
+    //   alert(newVal)
+    // }, {
+    //   immediate: true,
+    //   deep: true
+    // })
   },
-  computed: {
-    'conf.if': function() {
-      return false
-    }
-  },
-  updated() {
-  },
-  watch: {
-    thisForm: {
-      handler(newThisForm) {
-        if (this.selectKey) { // 有选中一条记录
-          const conf = newThisForm[this.selectKey] // 取得一个字段的配置
-          if (conf.hidden) { // 字段配置里是否含hidden
-            for (const attr1 in conf.hidden) {
-              this.$watch('formData.' + attr1, (newVal, oldVal) => {
-                debugger
-                var flag = this.hiddenCheck(this, conf.hidden)
-                this.$set(conf, 'if', flag)
-              }, {
-                immediate: true,
-                deep: true
-              })
-            }
-          }
-        }
-      }, deep: true, immediate: true
-    }
-  },
+  // watch: {
+
+  //   thisForm: {// 1 监听配置信息
+  //     handler(newThisForm) {
+  //       if (this.selectKey) { // 有选中一条记录
+  //         const conf = newThisForm[this.selectKey] // 取得一个字段的配置信息
+
+  //         if (conf.hidden) { // 字段配置里是否含hidden
+  //           for (const attr1 in conf.hidden) { // 对配置的所有值进行监听
+  //             this.$watch('formData.' + attr1, (newVal, oldVal) => {
+  //               var flag = this.hiddenCheck(this, conf.hidden)
+  //               this.$set(conf, 'if', flag)
+  //             }, {
+  //               immediate: true,
+  //               deep: true
+  //             })
+  //           }
+  //         }
+  //       }
+  //     }, deep: true, immediate: true
+  //   }
+  // },
   methods: {
     hiddenCheck: function(obj, checkObj) {
       for (const attr in checkObj) {
