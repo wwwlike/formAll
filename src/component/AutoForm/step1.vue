@@ -16,7 +16,9 @@ export default {
     }
   },
   created() {
-    this.$set(this, 'formData', JSON.parse(localStorage.getItem('formData')))
+    if (JSON.parse(localStorage.getItem('formData'))) {
+      this.$set(this, 'formData', JSON.parse(localStorage.getItem('formData')))
+    }
 
     if (!this.$route.query.opt && this.formData !== []) {
       this.$router.push({ path: '/create' }) // -> /user/123

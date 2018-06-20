@@ -7,9 +7,10 @@ const disabled = {
   data() {
     return {
       attrs: {
-        disabled: { title: '不可编辑条件', colType: 'object', span: 12 }
-
+        obj_disabled: { title: '不可编辑条件', colType: 'object', span: 12 }
       }
+      // ,
+      // isCommpAttr: true // 是否是元素苏醒
     }
   },
   computed: {

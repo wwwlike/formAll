@@ -53,7 +53,7 @@
       </el-col>
     </el-row> -->
     <div>
-      <el-button v-if="formData.length>0&&finishSize===formData.length" @click="next">下一步存到vuex里</el-button>
+      <el-button v-if="formData&&formData.length>0&&finishSize===formData.length" @click="next">下一步存到vuex里</el-button>
     </div>
   </div>
 </template>
@@ -80,12 +80,19 @@ export default {
   },
   computed: {
     finishSize() {
-      return this.formData.filter(one => {
+      debugger
+      var array = this.formData.filter(one => {
         if (one.key && one.val) {
           return true
         }
         return false
-      }).length
+      })
+
+      if (array) {
+        return array.length
+      } else {
+        return 0
+      }
     }
   }}
 </script>
