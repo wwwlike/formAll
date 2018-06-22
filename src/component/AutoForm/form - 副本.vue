@@ -25,25 +25,21 @@ export default {
     }
   },
   computed: {
-    form() {
+    newForm() { // 最新值得变化 关联值得变化，配置的变化
       debugger
-      // 1： 最新值的变化，关联值得变化和配置的变化
-      var form = {}
       // var data = this.formData
       for (var key in this.attrs) { // 1 对字段配置进行遍历
-        this.valChangeForConf(key) // 关注哪一个属性值得变化
-        //  是否有回掉函數
-
-        for (var field in this.thisForm) { // 对当前配置信息进行遍历
-          var attrConf = this.thisForm[field][key] // 找到這個配置的該屬性
-          if (attrConf && this[key + 'CallBack']) {
-            this[key + 'CallBack'].call(this, field, this.thisForm[field][key])
+        if (this.attrs[key].colType === 'object' && key.startsWith('obj_')) { // 2取出字段配置是object类型的字段
+          for (var field in this.thisForm) { // 对当前配置信息进行遍历
+            var attrConf = this.thisForm[field][key] // 找到這個配置的該屬性
+            if (attrConf) {
+              var flag = this.valCheck(this.formData, attrConf)
+              this.$set(this.thisForm[field], key.substring(4), flag)
+            }
           }
         }
       }
-      form.data = this.formData
-      form.conf = this.thisForm
-      return form
+      return this.thisForm
     },
     table() { // 表单配置转换成行列二维数组，并且把配置的KEY放入数组做KEY
       if (this.showType === 'design') {
@@ -62,24 +58,6 @@ export default {
     }
   },
   methods: {
-    // 值的变化影响配置的变化
-    // key 哪一个属性的关联属性需要变化  如obj_hidden 关联 hidden
-    valChangeForConf(key) {
-      // 1 字段是object 并且是关联配置变化的字段（“obj_”开头） this.attrs[key].colType === 'object' &&
-      if (key.startsWith('obj_')) {
-        for (var field in this.thisForm) { // 对当前配置信息进行遍历
-          var attrConf = this.thisForm[field][key] // 找到這個配置的該屬性
-          if (attrConf) {
-            var flag = this.valCheck(this.formData, attrConf) // 计算值得变化 是否改变配置的变化
-            this.$set(this.thisForm[field], key.substring(4), flag)
-          }
-        }
-      }
-    },
-    // 2值的变化影响其他的得变化
-    valChangeForOther() {
-
-    },
     voCompare, valCheck,
     compare(checkObj) {
       debugger

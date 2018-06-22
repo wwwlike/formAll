@@ -2,6 +2,10 @@ autoForm
 ## 基于vue表单自动校验，提交
 ## 表单各种模式配置
 
+# 组件介绍
+
+
+
 
 ## Build Setup
 
@@ -14,3 +18,4 @@ npm run dev
 
 # build for production with minification
 npm run build
+

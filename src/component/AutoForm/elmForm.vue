@@ -16,8 +16,14 @@ formData：所有表单的输入项目
 <template>
  <div>
     <!--v-if="col.if"-->
-   整个表单配置 {{newForm}}
+    <div v-if="showType==='design'" >
+       设计模式的表单配置信息
+    </div>
   
+    <div>
+        {{form}}
+    </div>
+
     <el-form size="small" :model="formData" status-icon :inline="true" ref="dynamicValidateForm" labelPosition="left">
       <el-row :key="index" v-for="(row,index) in table">
         <el-col :class="{red:col.key===selectKey}"  :span="col.span?col.span:12" @click.native="()=>{selectKey=col.key;$emit('selected',col.key)}" :key="col_index" v-for="(col,col_index) in row">
@@ -41,16 +47,17 @@ import hidden from './plugs/hidden'
 import title from './plugs/title'
 import colType from './plugs/colType'
 import disabled from './plugs/disabled'
+import relation from './plugs/relation'
 
 /**
  *各种元素ui导入
  */
-import { elFormDate, elFormInput, elFormSelect, elFormObject } from './forms/element'
+import { elFormDate, elFormInput, elFormSelect, elFormObject, elFormObject2 } from './forms/element'
 import form from './form.vue'
 
 export default {
-  mixins: [hidden, disabled, colType, title], // 混合进来的各种组件 在design情况下需要
-  components: { elFormDate, elFormInput, elFormSelect, elFormObject },
+  mixins: [relation, hidden, disabled, colType, title], // 混合进来的各种组件 在design情况下需要
+  components: { elFormDate, elFormInput, elFormSelect, elFormObject, elFormObject2 },
   extends: form,
   data() {
     return {

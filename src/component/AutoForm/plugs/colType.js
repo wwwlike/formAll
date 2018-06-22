@@ -8,7 +8,7 @@ const colType = {
     return {
       attrs: {
         colType: { title: '表单类型', colType: 'select', options: { select: '下拉框', input: '输入框' }, span: 12 }
-
+        // objectType: { title: '对象类型', colType: 'select', obj_disabled: { colType: 'object' }, span: 12 }
       }
     }
   },

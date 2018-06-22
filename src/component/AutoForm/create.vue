@@ -33,7 +33,14 @@
             </el-col></el-row>
           </el-form>
           <!---->
-          <elm-form :formData="currField"  showType="design"></elm-form> 
+          <elm-form :formData="currField"  showType="design" @dataOut="(data)=>{designData=data
+            
+            
+            }"></elm-form> 
+        </el-tab-pane>
+
+        <el-tab-pane label="代码">
+          <pre><code class="jsonStyle">{{JSON.stringify(designData, null, 2)}}</code></pre>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -52,14 +59,11 @@ export default {
   },
   data() {
     return {
-      autoForm: {
-        // name: { title: '姓名', colType: 'input', span: 12, x: 0, y: 0, disabled: { areacode: '1' }},
-        // tel: { title: '滇西电话', colType: 'input', span: 12, x: 0, y: 1, hidden: { name: 'a', areacode: 'b' }},
-        // areacode: { title: '区划编码', colType: 'input', span: 12, x: 1, y: 0, hidden: { name: 'c' }}
-      },
-      colKey: '', // 当前关键字
+      thisData: {}, // 真是表单值
+      designData: {}, // 设计表单值
+      autoForm: {},
+      colKey: '' // 当前关键字
 
-      thisData: {}
     }
   },
   watch: {
