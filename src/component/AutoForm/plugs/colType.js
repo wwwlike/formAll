@@ -7,38 +7,34 @@ const colType = {
   data() {
     return {
       attrs: {
-        colType: { title: '表单类型', colType: 'select', options: { select: '下拉框', input: '输入框' }, span: 12 }
-        // objectType: { title: '对象类型', colType: 'select', obj_disabled: { colType: 'object' }, span: 12 }
+        colType: {
+          title: '表单类型',
+          colType: 'select',
+          options: {
+            select: '下拉框',
+            input: '输入框'
+          },
+          span: 12
+        }
+
+        // objectType: {
+        //   title: '对象类型',
+        //   colType: 'select',
+        //   obj_hidden: {
+        //     colType: {
+        //       nq: 'object'
+        //     }
+        //   },
+        //   options: {
+        //     object: '简单',
+        //     object2: '逻辑关系',
+        //     object3: '2层结构'
+        //   },
+        //   span: 12
+        // }
       }
     }
-  },
-  computed: {
-    colType() {
-      // if (this.conf.hidden) {
-      //   debugger
-      //   return this.thisData + 1
-
-      // for (const attr in this.conf.hidden) {
-      //   if (this.thisData[attr] !== this.conf.hidden[attr]) {
-      //     return false
-      //   }
-      // }
-      // return true
-
-      // if (this.conf.hidden) {
-      //   debugger
-      //   console.log(this.thisData)
-      //   return this.hiddenCheck(this, this.conf.hidden)
-      // }
-      // return true
-    }
-  },
-  created() {
-
-  },
-  methods: {
   }
-
 }
 
 export default colType

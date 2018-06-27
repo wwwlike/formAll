@@ -8,14 +8,16 @@ const hidden = {
   data() {
     return {
       attrs: {
-        relation: { title: '关联关系', colType: 'object2', span: 12 }
+        relation: { title: '关联关系', colType: 'object', objType: 'object2', span: 12 }
       }
     }
   }, methods: {
     relationCallBack(key, conf) {
-      debugger
       for (var obj in conf) {
-        if (this.formData[key] === obj) {
+        if (
+          this.formData[key] === obj || // 等于空的情况
+          (!this.formData[key] && obj === 'null')
+        ) {
           for (var obj2 in conf[obj]) { this.$set(this.formData, obj2, conf[obj][obj2]) }
         }
       }

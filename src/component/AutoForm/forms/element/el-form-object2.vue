@@ -1,28 +1,23 @@
 <!--object组件-->
 <template>
-  <div>
-    <el-popover v-model="visible2" placement="right" width="600" height="600" trigger="click">
-      <wirteObj v-if="colType==='object'" :formData="formArray" @dataOut="dataOut"></wirteObj>
-      <wirteObj2 v-if="colType==='object2'" :formData="formArray" @dataOut="dataOut"></wirteObj2>
-      <wirteObj3 v-if="colType==='object3'" :formData="formArray" @dataOut="dataOut"></wirteObj3>
-      <el-input v-model="tempStr" slot="reference" v-bind=attrs></el-input>
-    </el-popover>
-  </div>
+<div> 
+<el-popover  v-model="visible2"
+  placement="right"
+  width="600" height="600"
+  trigger="click">
+    <wirteObj :formData="formArray" @dataOut="dataOut"></wirteObj>
+   <el-input v-model="tempStr"  slot="reference" v-bind=attrs></el-input> 
+</el-popover>
+</div>
 </template>
 
 <script>
 import wirteObj from '../common/wirteObj.vue'
-import wirteObj2 from '../common/wirteObj2.vue'
-import wirteObj3 from '../common/wirteObj3.vue'
+
 import common from '../common.vue'
 export default {
-  components: { wirteObj, wirteObj2, wirteObj3 },
-  props: {
-    objectType: {
-      type: Object,
-      default: 'object'
-    }
-  },
+  components: { wirteObj },
+
   data() {
     return {
       tempStr: '',
@@ -34,8 +29,17 @@ export default {
 
   },
   methods: {
-    // 复杂属性返回进行合并
     dataOut(array) {
+      // 数组转成对象
+      this.visible2 = false
+      this.$set(this.thisData, this.conf.key, {}) // 1设置对象
+      for (var i = 0; i < array.length; i++) {
+        // 设置对象各个属性
+        this.$set(this.thisData[this.conf.key], array[i].key, array[i].val)
+      }
+    },
+    // 复杂属性返回进行合并
+    dataOut2(array) {
       // 数组转成对象
       this.visible2 = false
       this.$set(this.thisData, this.conf.key, {}) // 1设置对象
@@ -51,13 +55,12 @@ export default {
     this.$watch('thisData.' + this.conf.key, (newVal, oldVal) => {
       this.formArray = []
       this.tempStr = JSON.stringify(this.thisData[this.conf.key], null, 2)
+
       for (var arrayKey in this.thisData[this.conf.key]) {
         const obj = {}
         obj.key = arrayKey
-        for (var arrayKey1 in this.thisData[this.conf.key][arrayKey]) {
-          obj.key1 = arrayKey1
-          obj.val = this.thisData[this.conf.key][arrayKey][arrayKey1]
-        }
+
+        obj.val = this.thisData[this.conf.key][arrayKey]
         this.formArray.push(obj)
       }
     })
