@@ -2,14 +2,18 @@
 方便初始化表单
 -->
 <template>
-  <wirteObj :formData="formData" @dataOut="dataOut"></wirteObj>
+<div>
+  <!-- <wirteObj :formData="formData" @dataOut="dataOut"></wirteObj> -->
+  <arrayObj :formData="formData" ></arrayObj>
+</div>
 </template>
 
 <script>
 import wirteObj from './forms/common/wirteObj.vue'
+import arrayObj from './forms/common/arrayObj.vue'
 
 export default {
-  components: { wirteObj },
+  components: { wirteObj, arrayObj },
   data() {
     return {
       formData: []

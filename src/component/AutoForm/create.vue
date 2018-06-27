@@ -71,10 +71,7 @@ export default {
       if (!this.autoForm[newKey] && this.autoForm[oldKey]) { // 修改操作
         this.copyData(newKey, oldKey)
       }
-    },
-    currField: function() {
-      var obj = JSON.parse(sessionStorage.getItem('array'))
-    }, deep: true
+    }
   },
   computed: {
     currField() {
